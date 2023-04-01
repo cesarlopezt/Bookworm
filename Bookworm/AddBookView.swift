@@ -13,7 +13,7 @@ struct AddBookView: View {
     @State private var title = ""
     @State private var author = ""
     @State private var rating = 3
-    @State private var genre = ""
+    @State private var genre = "Fantasy"
     @State private var review = ""
     
     let genres = ["Fantasy", "Horror", "Kids", "Mystery", "Poetry", "Romance", "Thriller"]
@@ -26,7 +26,7 @@ struct AddBookView: View {
                     TextField("Author's name", text: $author)
                     
                     Picker("Genre", selection: $genre) {
-                        ForEach(genres, id:  \.self) {
+                        ForEach(genres, id: \.self) {
                             Text($0)
                         }
                     }
@@ -35,11 +35,7 @@ struct AddBookView: View {
                 Section {
                     TextEditor(text: $review)
                     
-                    Picker("Rating", selection: $rating) {
-                        ForEach(0..<6) {
-                            Text(String($0))
-                        }
-                    }
+                    RatingView(rating: $rating)
                 } header: {
                     Text("Write a review")
                 }
